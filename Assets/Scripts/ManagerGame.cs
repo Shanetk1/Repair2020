@@ -11,6 +11,7 @@ public class ManagerGame : MonoBehaviour {
           float Timer;
 
     public int Distance;
+    public int Score;
 
     void Start()
     {
@@ -30,7 +31,7 @@ public class ManagerGame : MonoBehaviour {
         float seconds = Timer % 60;
 
         TextDistance.text = "Distance: " + Distance;
-        TextScore.text = "\n     Score: " + "smh";
+        TextScore.text = "\n     Score: " + Score;
         TextTime.text = string.Format("Time: {0:00} : {1:00}", minutes, seconds);
     }
 }

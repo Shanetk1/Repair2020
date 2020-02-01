@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour {
 
+    CloudDrift CloudDrift;
     public Transform CenterBackground;
     public GameObject Player01;
     public GameObject Player02;
@@ -17,25 +18,20 @@ public class CameraFollow : MonoBehaviour {
      ***/
     [Header("Infinite clouds background")]
     [SerializeField] GameObject[] Clouds;
-    // Still need to spawn clouds. Destroy clouds upon OnTriggerExit
+    [SerializeField] GameObject[] CloudsSpawnPoint;
 
     void Start()
     {   // CheckPoint is only used once. Eliminates (most) of camera jumpiness at start of game,
         StartCheckPoint = false; // when transitioning between static and then following player.
         transform.position = new Vector3(0, 1, -10f);   // Starting position of Camera.
+        Invoke("StartClouds", 10);
     }
 
     void Update()
-    {   // Camera follows Target.
+    {
         LowestPlayer();
-        if (Target.transform.position.y >= 1.7 || StartCheckPoint == true || DistanceBetweenPlayers >= 17)
-        { transform.position = new Vector3(transform.position.x, Target.transform.position.y+DistanceBetweenPlayers/2, transform.position.z); }
-        // Background switches when above a certain height, uses CenterBackground as anchor.
-        if (transform.position.y >= CenterBackground.position.y + 23f)
-        { CenterBackground.position = new Vector3(CenterBackground.position.x, transform.position.y + 23f, 1); }
-        // Background switches below a certain height, uses CenterBackground as anchor.
-        else if (transform.position.y <= CenterBackground.position.y - 23f)
-        { CenterBackground.position = new Vector3(CenterBackground.position.x, transform.position.y - 23f, 1); }
+        CameraFollowing();
+        BackgroundChanging();
     }
 
     // Camera checks which Player is nearest bottom of screen, and switches between
@@ -52,5 +48,30 @@ public class CameraFollow : MonoBehaviour {
             Target = Player02;
         }
         if (DistanceBetweenPlayers >= 17) { StartCheckPoint = true; }
+    }
+
+    void CameraFollowing()
+    {   // Camera follows Target.
+        if (Target.transform.position.y >= 1.7 || StartCheckPoint == true || DistanceBetweenPlayers >= 17)
+        { transform.position = new Vector3(transform.position.x, Target.transform.position.y + DistanceBetweenPlayers / 2, transform.position.z); }
+    }
+
+    void BackgroundChanging()
+    {   // Background switches when above a certain height, uses CenterBackground as anchor.
+        if (transform.position.y >= CenterBackground.position.y + 23f)
+        { CenterBackground.position = new Vector3(CenterBackground.position.x, transform.position.y + 23f, 10); }
+        // Background switches below a certain height, uses CenterBackground as anchor.
+        else if (transform.position.y <= CenterBackground.position.y - 23f)
+        { CenterBackground.position = new Vector3(CenterBackground.position.x, transform.position.y - 23f, 10); }
+    }
+
+    void StartClouds() { StartCoroutine(CloudsSpawning()); }
+    IEnumerator CloudsSpawning()
+    {   // Takes the MidAnchor and spawns randomly.
+        float RandomHeight = Random.Range((Target.transform.position.y - 7), (Target.transform.position.y + 7));
+        Instantiate(Clouds[Random.Range(0, 2)], /* x is chosen between 2 random spawn points*/
+            new Vector3(CloudsSpawnPoint[Random.Range(0, 1)].transform.position.x, RandomHeight, 9), Quaternion.identity);
+        yield return new WaitForSeconds(2);
+        StartCoroutine(CloudsSpawning());
     }
 }

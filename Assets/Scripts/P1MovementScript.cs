@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class movementScript : MonoBehaviour
+public class P1MovementScript : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -12,6 +12,8 @@ public class movementScript : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+		// this is Player 1 movement with arrow keys
+		// might want to switch it to a AddForce movement so it looks and feels better
     {
 		if (Input.GetKey(KeyCode.LeftArrow))
 		{
@@ -26,4 +28,7 @@ public class movementScript : MonoBehaviour
 			transform.Translate(Vector2.up);
 		}
 	}
+
+
+	// jump movement
 }

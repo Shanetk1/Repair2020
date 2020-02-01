@@ -61,13 +61,8 @@ public class Player01Movement : MonoBehaviour {
     }
 
 
-void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground")
-        { Grounded = true; }
-
-
-
         if (collision.gameObject.tag == "Platforms")
         {
             Debug.Log("Collision Occur");

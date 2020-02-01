@@ -71,7 +71,7 @@ public class CameraFollow : MonoBehaviour {
         float RandomHeight = Random.Range((Target.transform.position.y - 7), (Target.transform.position.y + 7));
         Instantiate(Clouds[Random.Range(0, 2)], /* x is chosen between 2 random spawn points*/
             new Vector3(CloudsSpawnPoint[Random.Range(0, 1)].transform.position.x, RandomHeight, 9), Quaternion.identity);
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(2);
         StartCoroutine(CloudsSpawning());
     }
 }

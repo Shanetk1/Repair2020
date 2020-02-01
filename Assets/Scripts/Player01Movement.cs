@@ -40,7 +40,7 @@ public class Player01Movement : MonoBehaviour {
         {
             transform.Translate(Vector2.right * MoveSpeed * Time.deltaTime);
         }
-        if (Input.GetKeyDown(KeyCode.W) && Grounded == true && Rigidbody2D.velocity.y == 0.0f) //  <--Necessary so player cant just jump when they are colliding thru platforms
+        if (Input.GetKeyDown(KeyCode.W) && Grounded == true)
         {
             Rigidbody2D.velocity = Vector2.up * JumpVelocity;
             Grounded = false;

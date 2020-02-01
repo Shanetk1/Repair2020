@@ -28,10 +28,14 @@ public class CameraFollow : MonoBehaviour {
     }
 
     void Update()
-    {
-        LowestPlayer();
-        CameraFollowing();
-        BackgroundChanging();
+    {   // Remove Null Reference Error when destroyed Player GameObject.
+        try
+        {
+            LowestPlayer();
+            CameraFollowing();
+            BackgroundChanging();
+        }
+        catch { }
     }
 
     // Camera checks which Player is nearest bottom of screen, and switches between
@@ -51,9 +55,19 @@ public class CameraFollow : MonoBehaviour {
     }
 
     void CameraFollowing()
-    {   // Camera follows Target.
+    {
+        int test = (int)transform.position.y;
+        Debug.Log(test);
+
         if (Target.transform.position.y >= 1.7 || StartCheckPoint == true || DistanceBetweenPlayers >= 17)
         { transform.position = new Vector3(transform.position.x, Target.transform.position.y + DistanceBetweenPlayers / 2, transform.position.z); }
+
+        // Tracking Main Camera distance
+        if ((int)transform.position.y >= 50)
+        {   // Camera will detach and speed.
+                    
+                    // STILL NEED TO DO
+        }
     }
 
     void BackgroundChanging()
@@ -70,7 +84,7 @@ public class CameraFollow : MonoBehaviour {
     {   // Takes the MidAnchor and spawns randomly.
         float RandomHeight = Random.Range((Target.transform.position.y - 7), (Target.transform.position.y + 7));
         Instantiate(Clouds[Random.Range(0, 2)], /* x is chosen between 2 random spawn points*/
-            new Vector3(CloudsSpawnPoint[Random.Range(0, 1)].transform.position.x, RandomHeight, 9), Quaternion.identity);
+            new Vector3(CloudsSpawnPoint[Random.Range(0, 2)].transform.position.x, RandomHeight, 9), Quaternion.identity);
         yield return new WaitForSeconds(2);
         StartCoroutine(CloudsSpawning());
     }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player01Movement : MonoBehaviour {
 
+    ManagerGame ManagerGame;
     Rigidbody2D Rigidbody2D;
     BoxCollider2D BoxCollider2D;
     bool Grounded;
@@ -15,15 +16,19 @@ public class Player01Movement : MonoBehaviour {
 
     void Start()
     {
+        ManagerGame = GameObject.Find("ManagerGame").GetComponent<ManagerGame>();
         Rigidbody2D = GetComponent<Rigidbody2D>();
         BoxCollider2D = GetComponent<BoxCollider2D>();
         Grounded = false;
     }
 
     void Update()
-    {
-        Movement();
-        BetterJump();
+    {   // Allowing movement when not dead.
+        if (ManagerGame.State != ManagerGame.Game.Dead)
+        {
+            Movement();
+            BetterJump();
+        }
     }
 
     // L+R with Vector2.
@@ -96,6 +101,10 @@ public class Player01Movement : MonoBehaviour {
         }
     }
 
+    // When exits PlayArea, destroyed obj and changes GameState.
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        Destroy(this.gameObject);
+        ManagerGame.State = ManagerGame.Game.Dead;
+    }
 }
-
-

@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 6477129356889823783}
   - component: {fileID: 6477129356889823782}
   m_Layer: 8
-  m_Name: Player1
-  m_TagString: Untagged
+  m_Name: Player01
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 10
-  JumpVelocity: 15
+  JumpVelocity: 10
   FallMultiplyer: 3.5
   LowJumpMultiplyer: 2
 --- !u!50 &6477129356889823783
@@ -145,5 +145,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.16}
+  m_Size: {x: 0.14, y: 0.15}
   m_EdgeRadius: 0

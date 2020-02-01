@@ -60,9 +60,49 @@ public class Player01Movement : MonoBehaviour {
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+
+void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground")
         { Grounded = true; }
+
+
+
+        if (collision.gameObject.tag == "Platforms")
+        {
+            Debug.Log("Collision Occur");
+            Grounded = true;
+
+
+            Color color = collision.collider.gameObject.GetComponent<SpriteRenderer>().color;
+
+            if (color == Color.red)
+            {
+                Debug.Log("Colour is Red");
+                //Collision IS DISABLED
+                Physics2D.IgnoreCollision(collision.collider, collision.otherCollider);
+            }
+            else if (color == Color.blue)
+            {
+                Debug.Log("Colour is blue");
+                //Collision IS ENABLED
+            }
+            else
+            {//Mainly for damage control and/or tutorial
+
+                Debug.Log("COLOUR IS NOTHING");
+                //SET COLOR TO BLUE
+               collision.collider.gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+
+            }
+            //Checking Colour; need spriterenderer via collisionobject getcomponent
+
+
+
+
+        }
     }
+
 }
+
+

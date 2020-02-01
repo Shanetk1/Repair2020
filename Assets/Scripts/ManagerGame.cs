@@ -12,7 +12,7 @@ public class ManagerGame : MonoBehaviour {
 
     void Start()
     {
-        
+
     }
 
     void Update()

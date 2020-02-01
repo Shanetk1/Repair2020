@@ -40,11 +40,15 @@ public class Player02Movement : MonoBehaviour {
         {
             transform.Translate(Vector2.right * MoveSpeed * Time.deltaTime);
         }
-        if (Input.GetKeyDown(KeyCode.UpArrow) && Grounded == true)
+        if (Input.GetKeyDown(KeyCode.UpArrow) && Grounded == true && Rigidbody2D.velocity.y == 0.0f)
         {
             Rigidbody2D.velocity = Vector2.up * JumpVelocity;
             Grounded = false;
         }
+        if (Rigidbody2D.velocity.y == 0.0f)//Sometimes grounded can get bugged out VIA Physics.IgnoreCollision This is the solution
+        {
+            Grounded = true;
+        }//THIS IS RISKY BECAUSE THIS COULD TRIGGER IN THE AIR AT THE PERFECT TIME
     }
 
     // Less floaty when jumping.
@@ -63,6 +67,33 @@ public class Player02Movement : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Platforms")
-        { Grounded = true; }
+        {
+            BoxCollider2D myCollider = collision.collider.gameObject.GetComponent<BoxCollider2D>();
+
+
+
+            Grounded = true;
+            Color playerCol = gameObject.GetComponent<SpriteRenderer>().color;
+            Color objCol = collision.gameObject.GetComponent<SpriteRenderer>().color;
+            if (playerCol == objCol)
+            {
+
+                myCollider.isTrigger = false;
+            }
+            else
+            {
+
+
+                //Detects diff colour 
+                myCollider.isTrigger = true;
+
+
+            }
+
+
+
+        }
     }
+
 }
+

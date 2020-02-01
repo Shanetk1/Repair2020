@@ -40,11 +40,15 @@ public class Player01Movement : MonoBehaviour {
         {
             transform.Translate(Vector2.right * MoveSpeed * Time.deltaTime);
         }
-        if (Input.GetKeyDown(KeyCode.W) && Grounded == true)
+        if (Input.GetKeyDown(KeyCode.W) && Grounded == true && Rigidbody2D.velocity.y == 0.0f)
         {
             Rigidbody2D.velocity = Vector2.up * JumpVelocity;
             Grounded = false;
         }
+        if (Rigidbody2D.velocity.y == 0.0f)//Sometimes grounded can get bugged out VIA Physics.IgnoreCollision This is the solution
+        {
+            Grounded = true;
+        }//THIS IS RISKY BECAUSE THIS COULD TRIGGER IN THE AIR AT THE PERFECT TIME
     }
 
     // Less floaty when jumping.
@@ -60,38 +64,32 @@ public class Player01Movement : MonoBehaviour {
         }
     }
 
-
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Platforms")
         {
-            Debug.Log("Collision Occur");
+            BoxCollider2D myCollider = collision.collider.gameObject.GetComponent<BoxCollider2D>();
+
+
+
             Grounded = true;
-
-
-            Color color = collision.collider.gameObject.GetComponent<SpriteRenderer>().color;
-
-            if (color == Color.red)
+            Color playerCol = gameObject.GetComponent<SpriteRenderer>().color;
+            Color objCol = collision.gameObject.GetComponent<SpriteRenderer>().color;
+            Debug.Log(playerCol);
+            if (playerCol == objCol)
             {
-                Debug.Log("Colour is Red");
-                //Collision IS DISABLED
-                Physics2D.IgnoreCollision(collision.collider, collision.otherCollider);
-            }
-            else if (color == Color.blue)
-            {
-                Debug.Log("Colour is blue");
-                //Collision IS ENABLED
+
+                myCollider.isTrigger = false;
             }
             else
-            {//Mainly for damage control and/or tutorial
+            {
+               
 
-                Debug.Log("COLOUR IS NOTHING");
-                //SET COLOR TO BLUE
-               collision.collider.gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+                //Detects diff colour 
+                myCollider.isTrigger = true;
+
 
             }
-            //Checking Colour; need spriterenderer via collisionobject getcomponent
-
 
 
 

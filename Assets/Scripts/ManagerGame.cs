@@ -5,10 +5,12 @@ using UnityEngine.UI;
 
 public class ManagerGame : MonoBehaviour {
 
-    public Text Height;
-    public Text Score;
-    public Text ShowTime;
-    float Timer;
+    public Text TextDistance;
+    public Text TextScore;
+    public Text TextTime;
+          float Timer;
+
+    public int Distance;
 
     void Start()
     {
@@ -17,12 +19,18 @@ public class ManagerGame : MonoBehaviour {
 
     void Update()
     {
+        UIUpdate();
+    }
+    
+    // Updating Time, Distance, and Score.
+    void UIUpdate()
+    {
         Timer += Time.deltaTime;
         float minutes = Timer / 60;
         float seconds = Timer % 60;
 
-        Height.text = "Height: " + "smh";
-        Score.text = "\n Score: " + "smh";
-        ShowTime.text = string.Format("Time: {0:00} : {1:00}", minutes, seconds);
+        TextDistance.text = "Distance: " + Distance;
+        TextScore.text = "\n     Score: " + "smh";
+        TextTime.text = string.Format("Time: {0:00} : {1:00}", minutes, seconds);
     }
 }

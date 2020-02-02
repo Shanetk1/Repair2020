@@ -9,6 +9,7 @@ public class GameGeneration : MonoBehaviour
     private const float DIST_FROM_CAMERA = 15f; //This is because the camera controls the game flow NOT THE PLAYER ///Basically, if camera is 20f away from mapend create new map
 
     [SerializeField] private Transform mapPiece;
+    [SerializeField] private List<Transform> mapPieces;
 
 
 
@@ -19,7 +20,7 @@ public class GameGeneration : MonoBehaviour
     private void Awake()
     {
         Transform mapTransform;
-        mapTransform = spawnPiece(new Vector3(0.0f, 0.0f)); //Spawning our spawnMap PIECE AT ORIGIN
+        mapTransform = spawnPiece(mapPiece ,new Vector3(0.0f, 0.0f)); //Spawning our spawnMap PIECE AT ORIGIN
         oldestMap = mapTransform;
         //^ Above must be done ON AWAKE because it is our origin map piece
 
@@ -53,23 +54,18 @@ public class GameGeneration : MonoBehaviour
             spawnPiece();
         }
 
-     /*   Debug.Log(distCam - oldestMap.position.y);
-        if (distCam - oldestMap.position.y >= -3.0f)
-        {
-            Debug.Log("deletion");
-            deletePiece();
-        }*/
+
         
     }
     private void spawnPiece()
     {
-
-        Transform mapEndPosition = spawnPiece(endPosition);         //BASICALLY, hey spawn the piece using old endPos, then return the new map piece TRANSFORM to the variable
+        Transform chosenPart = mapPieces[Random.Range(0, mapPieces.Count)];
+        Transform mapEndPosition = spawnPiece(chosenPart, endPosition);         //BASICALLY, hey spawn the piece using old endPos, then return the new map piece TRANSFORM to the variable
         endPosition = mapEndPosition.Find("EndPos").position;       //NOW RE-ASSIGN endPosition to find the most RECENTLY created MAP PIECE "EndPos"
     }
-    private Transform spawnPiece(Vector3 Pos)
+    private Transform spawnPiece(Transform levelPart, Vector3 Pos)
     {
-        Transform myTransform = Instantiate(mapPiece, Pos, Quaternion.identity);
+        Transform myTransform = Instantiate(levelPart, Pos, Quaternion.identity);
 
         return myTransform;
     }

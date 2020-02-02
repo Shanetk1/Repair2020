@@ -1964,6 +1964,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapPiece: {fileID: 1551577578349911644, guid: 6860435de2eb8bb4a8bb60cc2cf31dcf,
     type: 3}
+  mapPieces:
+  - {fileID: 1551577578349911644, guid: 6860435de2eb8bb4a8bb60cc2cf31dcf, type: 3}
+  - {fileID: 7640267710196691333, guid: afaa69d6e646ba348a7e4bc04dc6e72d, type: 3}
+  - {fileID: 5255122092191280941, guid: eae34236387d48742b0e075fa63a27c1, type: 3}
+  - {fileID: 8153520060427593806, guid: afa0cd82fc5563247b7bd49e539b58f2, type: 3}
+  - {fileID: 239900493552005373, guid: d8d3354ada949ff4994cab20ec11ccb2, type: 3}
+  - {fileID: 6152374988008896451, guid: 504c4d89985350c40939e27f517b4dc0, type: 3}
   myCam: {fileID: 1287918799}
 --- !u!1 &2126242754
 GameObject:

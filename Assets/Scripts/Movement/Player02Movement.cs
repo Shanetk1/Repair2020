@@ -121,7 +121,6 @@ public class Player02Movement : MonoBehaviour
 
         if (collision.collider.tag == "Powerup")
         {
-            Debug.Log("Hit powerup");
             Destroy(collision.collider.gameObject);
             doubleJump = true;
 

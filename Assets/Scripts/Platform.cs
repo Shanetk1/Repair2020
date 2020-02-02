@@ -18,28 +18,44 @@ public class Platform : MonoBehaviour
     {
 
         //On trigger checks the colour of the object hit and will enable disable our PARENT2D OBJ 
+        //Change colour to obj name
+        //Player1 is RED //Player2 is BLUE
 
-        
+        string myPlayer = collision.gameObject.name;//Our Player Name
+
+
         float RED = collision.gameObject.GetComponent<SpriteRenderer>().color.r;//Grabs Object that hit us so our PLAYER
         float BLUE = collision.gameObject.GetComponent<SpriteRenderer>().color.b;
         Color col2 = gameObject.transform.parent.GetComponent<SpriteRenderer>().color;//Grabs the platforms colour
 
 
-        if (RED >= 1.0f && col2 == Color.red || BLUE >= 1.0f && col2 == Color.blue )
+        if (myPlayer.Contains("Player1"))
         {
-            
+            if (col2 == Color.red)
+            {
+                gameObject.transform.parent.GetComponent<BoxCollider2D>().isTrigger = false;
 
-
-            gameObject.transform.parent.GetComponent<BoxCollider2D>().isTrigger = false;
-            //If same colour ensure our ACTUAL COLLIDER is not an isTrigger
-        }
-        else
-        {
-            gameObject.transform.parent.GetComponentInParent<BoxCollider2D>().isTrigger = true;
-            //If not same colour ensure our ACTUAL COLLIDER is an isTrigger
-            //This is set BEFORE COLLISION CAN OCCUR OR MAY OCCUR
+            }
+            else
+            {
+                gameObject.transform.parent.GetComponent<BoxCollider2D>().isTrigger = true;
+            }//Meaning Color of our platform is BLUE
 
         }
+        else if (myPlayer.Contains("Player2"))
+        {
+            if (col2 == Color.blue)
+            {
+                gameObject.transform.parent.GetComponent<BoxCollider2D>().isTrigger = false;
+
+            }
+            else
+            {
+                gameObject.transform.parent.GetComponent<BoxCollider2D>().isTrigger = true;
+            }//Meaning Color of our platform is BLUE
+
+        }
+
 
         
     }
@@ -60,17 +76,16 @@ public class Platform : MonoBehaviour
         //When we leave this trigger
         //Get colour of PLAYER because if STAY IS TRUE we know PLAYER.COLOUR == PLATFORM.COLOUR 
 
-        Color playerColour = collision.gameObject.GetComponent<SpriteRenderer>().color;
+        string player = collision.gameObject.name;
         if (stay)
         {
             SpriteRenderer platColour = gameObject.transform.parent.GetComponent<SpriteRenderer>();
-            if (playerColour.r >= 1.0f)
+            if (player.Contains("Player1"))//Player is Red
             {
                 platColour.color = Color.blue;
             }
-            else if (playerColour.b >= 1.0f)//Safer if than using else
+            else if (player.Contains("Player2"))//Player is Blue
             {
-                //Turn Platform Red
                 platColour.color = Color.red;
             }
             stay = false;

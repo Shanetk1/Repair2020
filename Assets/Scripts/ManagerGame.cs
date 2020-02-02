@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ManagerGame : MonoBehaviour {
 
@@ -19,6 +20,7 @@ public class ManagerGame : MonoBehaviour {
     void Start()
     {
         State = Game.h_0;
+        Time.timeScale = 0.0f;
     }
 
     void Update()
@@ -28,6 +30,18 @@ public class ManagerGame : MonoBehaviour {
             Distance = (int) MCamera.transform.position.y;
             UIUpdate();
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+
+
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene("Game");
+        }
+
     }
 
     // Updating Time, Distance, and Score.
@@ -36,6 +50,7 @@ public class ManagerGame : MonoBehaviour {
         Timer += Time.deltaTime;
         float minutes = Timer / 60;
         float seconds = Timer % 60;
+
 
         TextDistance.text = "Distance: " + Distance + "m";
         TextScore.text = "\n     Score: " + Score;

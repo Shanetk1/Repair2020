@@ -56,9 +56,6 @@ public class CameraFollow : MonoBehaviour {
 
     void CameraFollowing()
     {
-        int test = (int)transform.position.y;
-        Debug.Log(test);
-
         if (Target.transform.position.y >= 1.7 || StartCheckPoint == true || DistanceBetweenPlayers >= 17)
         { transform.position = new Vector3(transform.position.x, Target.transform.position.y + DistanceBetweenPlayers / 2, transform.position.z); }
 
@@ -85,7 +82,7 @@ public class CameraFollow : MonoBehaviour {
         float RandomHeight = Random.Range((Target.transform.position.y - 7), (Target.transform.position.y + 7));
         Instantiate(Clouds[Random.Range(0, 2)], /* x is chosen between 2 random spawn points*/
             new Vector3(CloudsSpawnPoint[Random.Range(0, 2)].transform.position.x, RandomHeight, 9), Quaternion.identity);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(6);
         StartCoroutine(CloudsSpawning());
     }
 }

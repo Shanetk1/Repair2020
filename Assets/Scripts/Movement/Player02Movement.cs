@@ -7,7 +7,7 @@ public class Player02Movement : MonoBehaviour {
     ManagerGame ManagerGame;
     Rigidbody2D Rigidbody2D;
     BoxCollider2D BoxCollider2D;
-    bool Grounded;
+    [SerializeField] bool Grounded;
 
     public float MoveSpeed = 10f;
     public float JumpVelocity = 10f;
@@ -47,6 +47,7 @@ public class Player02Movement : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.UpArrow) && Grounded == true && Rigidbody2D.velocity.y == 0.0f)
         {
+            
             Rigidbody2D.velocity = Vector2.up * JumpVelocity;
             Grounded = false;
         }

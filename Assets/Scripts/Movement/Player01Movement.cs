@@ -9,6 +9,8 @@ public class Player01Movement : MonoBehaviour {
     BoxCollider2D BoxCollider2D;
     [SerializeField] bool Grounded;
 
+    //Animations
+    public Animator myAnim;
 
     public float MoveSpeed = 10f;
     public float JumpVelocity = 10f;
@@ -16,6 +18,11 @@ public class Player01Movement : MonoBehaviour {
     public float LowJumpMultiplyer = 2f;
 
     private bool doubleJump = false; //Handled internally
+    private float horizMove = 0.0f;
+
+    private bool isFacingRight = true;
+
+
 
     void Start()
     {
@@ -31,6 +38,7 @@ public class Player01Movement : MonoBehaviour {
         {
             Movement();
             BetterJump();
+
         }
     }
 
@@ -40,7 +48,9 @@ public class Player01Movement : MonoBehaviour {
     // Rigidbody Z Constraint, locked.
     void Movement()
     {
-
+        horizMove = Mathf.Abs(Input.GetAxisRaw("Horizontal") * MoveSpeed);
+        //^ Could be used for left right movement but I need it for speed since we used Translate
+        myAnim.SetFloat("Speed", horizMove);
 
         if (Input.GetKeyDown(KeyCode.W) && Grounded == false && doubleJump == true)
         {
@@ -49,19 +59,31 @@ public class Player01Movement : MonoBehaviour {
             Rigidbody2D.velocity = Vector2.up * JumpVelocity;
             doubleJump = false;
         }
-
+        
 
 
         if (Input.GetKey(KeyCode.A))
         {
             transform.Translate(Vector2.left * MoveSpeed * Time.deltaTime);
+
+            if (isFacingRight)
+            {
+                flip();
+            }
         }
         if (Input.GetKey(KeyCode.D))
         {
             transform.Translate(Vector2.right * MoveSpeed * Time.deltaTime);
+
+            if (!isFacingRight)
+            {
+                flip();
+            }
+
         }
         if (Input.GetKeyDown(KeyCode.W) && Grounded == true && Rigidbody2D.velocity.y == 0.0f)
         {
+            myAnim.SetBool("isJump", true);
             
             Rigidbody2D.velocity = Vector2.up * JumpVelocity;
             Grounded = false;
@@ -72,8 +94,13 @@ public class Player01Movement : MonoBehaviour {
         }//THIS IS RISKY BECAUSE THIS COULD TRIGGER IN THE AIR AT THE PERFECT TIME
 
 
+        if (Grounded == true && Rigidbody2D.velocity.y == 0.0f)
+        {
+            myAnim.SetBool("isJump", false);
+        }
 
 
+        
     }
 
     // Less floaty when jumping.
@@ -103,13 +130,23 @@ public class Player01Movement : MonoBehaviour {
     }
 
     // When exits PlayArea, destroyed obj and changes GameState.
-  /*  void OnTriggerExit2D(Collider2D collision)
+    /*  void OnTriggerExit2D(Collider2D collision)
+      {
+          Debug.Log(collision.gameObject.tag);
+          if (collision.gameObject.tag != "Platforms")
+          {
+              Destroy(this.gameObject);
+              ManagerGame.State = ManagerGame.Game.Dead;
+          }
+      }*/
+
+    private void flip()
     {
-        Debug.Log(collision.gameObject.tag);
-        if (collision.gameObject.tag != "Platforms")
-        {
-            Destroy(this.gameObject);
-            ManagerGame.State = ManagerGame.Game.Dead;
-        }
-    }*/
+        isFacingRight = !isFacingRight;
+
+        //Basically flipping the character 
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
+    }
 }

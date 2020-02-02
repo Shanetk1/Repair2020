@@ -22,6 +22,7 @@ public class Player01Movement : MonoBehaviour {
 
     private bool isFacingRight = true;
 
+    public bool getisGround() { return Grounded; }
 
 
     void Start()

@@ -82,13 +82,23 @@ public class Platform : MonoBehaviour
     //Our logic which tells the platform whether the block can change colours or not
     private void OnTriggerStay2D(Collider2D collision)
     {
+        
         Rigidbody2D myBody = collision.gameObject.GetComponent<Rigidbody2D>();
+
+        Player01Movement pScript =  myBody.gameObject.GetComponent<Player01Movement>();
+/*
+        if ()
+        {
+            pScript.getisGround();
+        }
+        */
+
         BoxCollider2D myBox = gameObject.transform.parent.GetComponent<BoxCollider2D>();
         if (myBody != null)//Meaning this IS A PLAYER
         {
             if (myBox != null && myBox.isTrigger == false)
             {
-                if (myBody.velocity.y == 0.0f)
+                if (myBody.velocity.y == 0.0f && )
                 {
                     //Baiscally if Our PLAYER 
                     stay = true;

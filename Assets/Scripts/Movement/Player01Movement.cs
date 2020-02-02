@@ -89,10 +89,6 @@ public class Player01Movement : MonoBehaviour {
             Rigidbody2D.velocity = Vector2.up * JumpVelocity;
             Grounded = false;
         }
-        if (Rigidbody2D.velocity.y == 0.0f)//Sometimes grounded can get bugged out VIA Physics.IgnoreCollision This is the solution
-        {
-            Grounded = true;
-        }//THIS IS RISKY BECAUSE THIS COULD TRIGGER IN THE AIR AT THE PERFECT TIME
 
 
         if (Grounded == true && Rigidbody2D.velocity.y == 0.0f)
@@ -127,7 +123,11 @@ public class Player01Movement : MonoBehaviour {
             doubleJump = true;
             
         }
+        if (collision.gameObject.tag == "Ground")
+        { Grounded = true; }
 
+        if (collision.gameObject.tag == "Platforms")
+        { Grounded = true; }
     }
 
     // When exits PlayArea, destroyed obj and changes GameState.

@@ -49,9 +49,10 @@ public class Player02Movement : MonoBehaviour
     // Rigidbody Z Constraint, locked.
     void Movement()
     {
-        horizMove = Mathf.Abs(Input.GetAxisRaw("Horizontal") * MoveSpeed);
+        horizMove = Mathf.Abs(Input.GetAxisRaw("HorizontalPlayer2") * MoveSpeed);
         //^ Could be used for left right movement but I need it for speed since we used Translate
         myAnim.SetFloat("Speed", horizMove);
+
 
         if (Input.GetKeyDown(KeyCode.UpArrow) && Grounded == false && doubleJump == true)
         {
@@ -59,6 +60,7 @@ public class Player02Movement : MonoBehaviour
             Debug.Log("Double Jumping");
             Rigidbody2D.velocity = Vector2.up * JumpVelocity;
             doubleJump = false;
+
         }
 
 

@@ -110,7 +110,7 @@ public class Player01Movement : MonoBehaviour {
         {
             Rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (FallMultiplyer - 1) * Time.deltaTime;
         }
-        else if (Rigidbody2D.velocity.y > 0 && !Input.GetKey(KeyCode.UpArrow))
+        else if (Rigidbody2D.velocity.y > 0 && !Input.GetKey(KeyCode.W))
         {   // Jump increases longer holds down Jump Button.
             Rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (LowJumpMultiplyer - 1) * Time.deltaTime;
         }

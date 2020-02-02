@@ -7,21 +7,28 @@ public class Platform : MonoBehaviour
     //**This script Disables/Enables isTrigger of the Platform Collider based on player COLOUR**//
 
 
+    private void Start()
+    {
 
+    }
 
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
         //On trigger checks the colour of the object hit and will enable disable our PARENT2D OBJ 
 
-        Color col = collision.gameObject.GetComponent<SpriteRenderer>().color;//Grabs Object that hit us so our PLAYER
-        Color col2 = gameObject.transform.parent.GetComponent<SpriteRenderer>().color;//Grabs the platforms actual collider box
+        
+        float RED = collision.gameObject.GetComponent<SpriteRenderer>().color.r;//Grabs Object that hit us so our PLAYER
+        float BLUE = collision.gameObject.GetComponent<SpriteRenderer>().color.b;
+        Color col2 = gameObject.transform.parent.GetComponent<SpriteRenderer>().color;//Grabs the platforms colour
 
-        if (col == col2)
+
+        if (RED >= 1.0f && col2 == Color.red || BLUE >= 1.0f && col2 == Color.blue )
         {
             
-            Debug.Log("Same Colour is true");
+
 
             gameObject.transform.parent.GetComponent<BoxCollider2D>().isTrigger = false;
             //If same colour ensure our ACTUAL COLLIDER is not an isTrigger
@@ -57,11 +64,11 @@ public class Platform : MonoBehaviour
         if (stay)
         {
             SpriteRenderer platColour = gameObject.transform.parent.GetComponent<SpriteRenderer>();
-            if (playerColour == Color.red)
+            if (playerColour.r >= 1.0f)
             {
                 platColour.color = Color.blue;
             }
-            else if (playerColour == Color.blue)//Safer if than using else
+            else if (playerColour.b >= 1.0f)//Safer if than using else
             {
                 //Turn Platform Red
                 platColour.color = Color.red;

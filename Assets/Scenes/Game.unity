@@ -1440,6 +1440,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8630584306884091057, guid: 02e653370a13070419b3349beeef7ea1,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8630584306884091058, guid: 02e653370a13070419b3349beeef7ea1,
         type: 3}
       propertyPath: m_Name
@@ -1931,7 +1936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00361bfa7389a35468294e4a27e9dfc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapPiece: {fileID: 1551577578349911644, guid: 6860435de2eb8bb4a8bb60cc2cf31dcf,
+  mapPiece: {fileID: 3679703248859138239, guid: 006466d71852a1c40aec984855a72c6d,
     type: 3}
   mapPieces:
   - {fileID: 1551577578349911644, guid: 6860435de2eb8bb4a8bb60cc2cf31dcf, type: 3}
@@ -2085,6 +2090,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 766365679027927681, guid: 8e382a2d13b774444ba1a96bd8360204,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.6666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 766365679027927681, guid: 8e382a2d13b774444ba1a96bd8360204,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.6666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 766365679027927681, guid: 8e382a2d13b774444ba1a96bd8360204,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 766365679027927682, guid: 8e382a2d13b774444ba1a96bd8360204,
         type: 3}

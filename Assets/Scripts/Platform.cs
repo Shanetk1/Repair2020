@@ -98,7 +98,7 @@ public class Platform : MonoBehaviour
         {
             if (myBox != null && myBox.isTrigger == false)
             {
-                if (myBody.velocity.y == 0.0f && )
+                if (myBody.velocity.y == 0.0f)
                 {
                     //Baiscally if Our PLAYER 
                     stay = true;

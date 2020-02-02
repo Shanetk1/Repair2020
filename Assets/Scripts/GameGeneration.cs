@@ -10,6 +10,8 @@ public class GameGeneration : MonoBehaviour
 
     [SerializeField] private Transform mapPiece;
 
+
+
     private Vector3 endPosition;
     public Camera myCam;
 

@@ -135,7 +135,7 @@ PrefabInstance:
     - target: {fileID: 1551577578349911647, guid: 6860435de2eb8bb4a8bb60cc2cf31dcf,
         type: 3}
       propertyPath: m_Name
-      value: MapPiece_3
+      value: MapPiece_3 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1551577578349911647, guid: 6860435de2eb8bb4a8bb60cc2cf31dcf,
         type: 3}

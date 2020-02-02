@@ -73,40 +73,17 @@ public class Player01Movement : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Platforms")
-        {
-            BoxCollider2D myCollider = collision.collider.gameObject.GetComponent<BoxCollider2D>();
 
-
-
-            Grounded = true;
-            Color playerCol = gameObject.GetComponent<SpriteRenderer>().color;
-            Color objCol = collision.gameObject.GetComponent<SpriteRenderer>().color;
-            Debug.Log(playerCol);
-            if (playerCol == objCol)
-            {
-
-                myCollider.isTrigger = false;
-            }
-            else
-            {
-               
-
-                //Detects diff colour 
-                myCollider.isTrigger = true;
-
-
-            }
-
-
-
-        }
     }
 
     // When exits PlayArea, destroyed obj and changes GameState.
-    void OnTriggerExit2D(Collider2D collision)
+  /*  void OnTriggerExit2D(Collider2D collision)
     {
-        Destroy(this.gameObject);
-        ManagerGame.State = ManagerGame.Game.Dead;
-    }
+        Debug.Log(collision.gameObject.tag);
+        if (collision.gameObject.tag != "Platforms")
+        {
+            Destroy(this.gameObject);
+            ManagerGame.State = ManagerGame.Game.Dead;
+        }
+    }*/
 }

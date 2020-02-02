@@ -8,24 +8,24 @@ public class GameGeneration : MonoBehaviour
 
     private const float DIST_FROM_CAMERA = 15f; //This is because the camera controls the game flow NOT THE PLAYER ///Basically, if camera is 20f away from mapend create new map
 
-    [SerializeField] private Transform mapPiece;
-    [SerializeField] private List<Transform> mapPieces;
+    [SerializeField] private Transform mapPiece = null;
+    [SerializeField] private List<Transform> mapPieces = null;
 
 
 
     private Vector3 endPosition;
     public Camera myCam;
 
-    private Transform oldestMap;
+
+    private LinkedList<GameObject> oldMaps = null;
+
     private void Awake()
     {
+        oldMaps = new LinkedList<GameObject>();
+
         Transform mapTransform;
         mapTransform = spawnPiece(mapPiece ,new Vector3(0.0f, 0.0f)); //Spawning our spawnMap PIECE AT ORIGIN
-        oldestMap = mapTransform;
-        //^ Above must be done ON AWAKE because it is our origin map piece
-
-
-
+        oldMaps.AddFirst(mapTransform.gameObject);
         endPosition = mapPiece.Find("EndPos").position;
 
 
@@ -54,8 +54,19 @@ public class GameGeneration : MonoBehaviour
             spawnPiece();
         }
 
+        Debug.Log(oldMaps.Count);
+        if (oldMaps.Count >= 10)
+        {
+            //oldMaps.
+            Destroy(oldMaps.Last.Value, 1.5f);
+            oldMaps.RemoveLast();
+
+        }
+
 
         
+        
+
     }
     private void spawnPiece()
     {
@@ -67,12 +78,13 @@ public class GameGeneration : MonoBehaviour
     {
         Transform myTransform = Instantiate(levelPart, Pos, Quaternion.identity);
 
+        oldMaps.AddFirst(myTransform.gameObject);
         return myTransform;
     }
 
     private void deletePiece()
     {
-        Destroy(oldestMap.gameObject, 5);
+        oldMaps.RemoveLast();
     }
 }
 

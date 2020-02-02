@@ -27,18 +27,6 @@ public class GameGeneration : MonoBehaviour
         mapTransform = spawnPiece(mapPiece ,new Vector3(0.0f, 0.0f)); //Spawning our spawnMap PIECE AT ORIGIN
         oldMaps.AddFirst(mapTransform.gameObject);
         endPosition = mapPiece.Find("EndPos").position;
-
-
-    
-
-
-
-    }
-
-    void Start()
-    {
-       // myCam = Camera.main;
-        
     }
 
     // Update is called once per frame
@@ -50,23 +38,14 @@ public class GameGeneration : MonoBehaviour
        
         if (lastMapEnd - distCam < DIST_FROM_CAMERA)
         {
-          //  deletePiece()
             spawnPiece();
         }
-
-        Debug.Log(oldMaps.Count);
         if (oldMaps.Count >= 10)
         {
-            //oldMaps.
             Destroy(oldMaps.Last.Value, 1.5f);
             oldMaps.RemoveLast();
 
         }
-
-
-        
-        
-
     }
     private void spawnPiece()
     {
@@ -80,11 +59,6 @@ public class GameGeneration : MonoBehaviour
 
         oldMaps.AddFirst(myTransform.gameObject);
         return myTransform;
-    }
-
-    private void deletePiece()
-    {
-        oldMaps.RemoveLast();
     }
 }
 

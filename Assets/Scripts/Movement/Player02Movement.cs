@@ -14,6 +14,8 @@ public class Player02Movement : MonoBehaviour {
     public float FallMultiplyer = 3.5f;
     public float LowJumpMultiplyer = 2f;
 
+    private bool doubleJump = false;
+
     void Start()
     {
         ManagerGame = GameObject.Find("ManagerGame").GetComponent<ManagerGame>();
@@ -55,6 +57,13 @@ public class Player02Movement : MonoBehaviour {
         {
             Grounded = true;
         }//THIS IS RISKY BECAUSE THIS COULD TRIGGER IN THE AIR AT THE PERFECT TIME
+        if (doubleJump == true && Input.GetKeyDown(KeyCode.W) && Grounded == false)
+        {
+            //Expend Double Jump!
+            Rigidbody2D.velocity = Vector2.up * JumpVelocity;
+            doubleJump = false;
+
+        }
     }
 
     // Less floaty when jumping.
@@ -72,6 +81,15 @@ public class Player02Movement : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.collider.tag == "Powerup")
+        {
+
+            Debug.Log("Hit powerup");
+
+            Destroy(collision.collider.gameObject);
+            doubleJump = true;
+
+        }
     }
 
     // When exits PlayArea, destroyed obj and changes GameState.

@@ -15,6 +15,8 @@ public class Player01Movement : MonoBehaviour {
     public float FallMultiplyer = 3.5f;
     public float LowJumpMultiplyer = 2f;
 
+    private bool doubleJump = false; //Handled internally
+
     void Start()
     {
         ManagerGame = GameObject.Find("ManagerGame").GetComponent<ManagerGame>();
@@ -38,6 +40,18 @@ public class Player01Movement : MonoBehaviour {
     // Rigidbody Z Constraint, locked.
     void Movement()
     {
+
+
+        if (Input.GetKeyDown(KeyCode.W) && Grounded == false && doubleJump == true)
+        {
+            //Expend Double Jump!
+            Debug.Log("Double Jumping");
+            Rigidbody2D.velocity = Vector2.up * JumpVelocity;
+            doubleJump = false;
+        }
+
+
+
         if (Input.GetKey(KeyCode.A))
         {
             transform.Translate(Vector2.left * MoveSpeed * Time.deltaTime);
@@ -56,6 +70,10 @@ public class Player01Movement : MonoBehaviour {
         {
             Grounded = true;
         }//THIS IS RISKY BECAUSE THIS COULD TRIGGER IN THE AIR AT THE PERFECT TIME
+
+
+
+
     }
 
     // Less floaty when jumping.
@@ -73,6 +91,14 @@ public class Player01Movement : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        
+        if (collision.collider.tag == "Powerup")
+        {
+            Debug.Log("Hit powerup");
+            Destroy(collision.collider.gameObject);
+            doubleJump = true;
+            
+        }
 
     }
 

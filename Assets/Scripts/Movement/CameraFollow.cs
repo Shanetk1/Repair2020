@@ -17,8 +17,8 @@ public class CameraFollow : MonoBehaviour {
         * BotAnchor - OnTriggerExit (for death) collider with lowest point Player can fall.
      ***/
     [Header("Infinite clouds background")]
-    [SerializeField] GameObject[] Clouds;
-    [SerializeField] GameObject[] CloudsSpawnPoint;
+    [SerializeField] GameObject[] Clouds = null;
+    [SerializeField] GameObject[] CloudsSpawnPoint = null;
 
     void Start()
     {   // CheckPoint is only used once. Eliminates (most) of camera jumpiness at start of game,

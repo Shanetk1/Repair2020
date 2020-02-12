@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 00361bfa7389a35468294e4a27e9dfc8
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - mapPiece: {fileID: 1551577578349911644, guid: 6860435de2eb8bb4a8bb60cc2cf31dcf,
+      type: 3}
+  - myCam: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
